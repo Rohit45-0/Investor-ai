@@ -4,6 +4,7 @@ This folder contains the core submission assets for the hackathon.
 
 ## Included
 
+- `Investor_ai_Detailed_Submission.pdf`
 - [architecture.md](./architecture.md)
 - [impact_model.md](./impact_model.md)
 - `pitch_video/Investor_ai_Hackathon_Demo.mp4`
@@ -20,4 +21,5 @@ This folder contains the core submission assets for the hackathon.
 ```bash
 python scripts/prepare_demo.py --serve
 python scripts/render_product_demo.py --overwrite-audio
+python scripts/build_submission_pdf.py
 ```

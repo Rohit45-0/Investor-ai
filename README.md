@@ -21,6 +21,7 @@ It also now includes a partial `AI Market Video Engine` lane that builds a Remot
 
 ## Submission Assets
 
+- `submission/Investor_ai_Detailed_Submission.pdf` - detailed upload-ready submission document
 - `submission/architecture.md` - architecture diagram and system description
 - `submission/impact_model.md` - quantified impact assumptions
 - `submission/pitch_video/Investor_ai_Hackathon_Demo.mp4` - 3-minute pitch video
