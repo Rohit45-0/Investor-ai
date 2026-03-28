@@ -37,9 +37,15 @@ class ArchitectureDiagram(Flowable):
         super().__init__()
         self.width = width
         self.height = height
+        self.base_width = 650
+        self.base_height = 236
+        self.draw_width = width
+        self.draw_height = height
 
     def wrap(self, availWidth, availHeight):
-        return min(availWidth, self.width), self.height
+        self.draw_width = min(availWidth, self.width)
+        self.draw_height = self.height
+        return self.draw_width, self.draw_height
 
     def draw_box(self, x, y, w, h, title, subtitle="", fill="#F6F3EC", stroke="#D6CDBF", title_color="#172033"):
         self.canv.saveState()
@@ -75,10 +81,11 @@ class ArchitectureDiagram(Flowable):
 
     def draw(self):
         c = self.canv
-        width = self.width
-        height = self.height
+        width = self.base_width
+        height = self.base_height
 
         c.saveState()
+        c.scale(self.draw_width / self.base_width, self.draw_height / self.base_height)
         c.setFillColor(colors.HexColor("#FBF7F0"))
         c.setStrokeColor(colors.HexColor("#E3D9C7"))
         c.roundRect(0, 0, width, height, 14, fill=1, stroke=1)
@@ -204,6 +211,39 @@ def build_styles():
     )
     styles.add(
         ParagraphStyle(
+            name="TableHeader",
+            parent=styles["BodyText"],
+            fontName="Helvetica-Bold",
+            fontSize=9.1,
+            leading=11,
+            textColor=colors.white,
+            alignment=TA_LEFT,
+        )
+    )
+    styles.add(
+        ParagraphStyle(
+            name="TableCell",
+            parent=styles["BodyText"],
+            fontName="Helvetica",
+            fontSize=8.9,
+            leading=11,
+            textColor=colors.HexColor("#232836"),
+            wordWrap="CJK",
+        )
+    )
+    styles.add(
+        ParagraphStyle(
+            name="TableCellSmall",
+            parent=styles["BodyText"],
+            fontName="Helvetica",
+            fontSize=8.3,
+            leading=10.2,
+            textColor=colors.HexColor("#232836"),
+            wordWrap="CJK",
+        )
+    )
+    styles.add(
+        ParagraphStyle(
             name="Callout",
             parent=styles["BodyText"],
             fontName="Helvetica-Bold",
@@ -217,7 +257,15 @@ def build_styles():
 
 
 def bullet(text: str, styles) -> Paragraph:
-    return Paragraph(f"• {text}", styles["BulletCopy"])
+    return Paragraph(f"&bull; {text}", styles["BulletCopy"])
+
+
+def wrap_table_rows(rows, styles, *, body_style: str = "TableCell", header_style: str = "TableHeader"):
+    wrapped = []
+    for row_index, row in enumerate(rows):
+        style_name = header_style if row_index == 0 else body_style
+        wrapped.append([Paragraph(str(cell), styles[style_name]) for cell in row])
+    return wrapped
 
 
 def section_heading(title: str, styles):
@@ -232,15 +280,12 @@ def metrics_table(styles):
         ["Direct improved-decision value", "~ INR 12 lakh/year", "Conservative monthly benefit on a small subset of users"],
         ["Analyst / creator media time", "250 hours/year per operator", "Automated market brief generation instead of manual editing"],
     ]
-    table = Table(rows, colWidths=[120, 120, 250])
+    table = Table(wrap_table_rows(rows, styles), colWidths=[108, 100, 257], repeatRows=1, hAlign="LEFT")
     table.setStyle(
         TableStyle(
             [
                 ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#20365F")),
                 ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-                ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-                ("FONTSIZE", (0, 0), (-1, -1), 9.2),
-                ("LEADING", (0, 0), (-1, -1), 12),
                 ("BACKGROUND", (0, 1), (-1, -1), colors.HexColor("#FBF7F0")),
                 ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.HexColor("#FBF7F0"), colors.HexColor("#F4EEE2")]),
                 ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#D8CEBF")),
@@ -255,7 +300,7 @@ def metrics_table(styles):
     return table
 
 
-def products_table():
+def products_table(styles):
     rows = [
         ["Product", "Primary Input", "Output", "Why It Matters", "AI Mode"],
         [
@@ -287,15 +332,12 @@ def products_table():
             "Payload + TTS + Remotion",
         ],
     ]
-    table = Table(rows, colWidths=[100, 135, 105, 150, 90])
+    table = Table(wrap_table_rows(rows, styles, body_style="TableCellSmall"), colWidths=[82, 103, 78, 129, 73], repeatRows=1, hAlign="LEFT")
     table.setStyle(
         TableStyle(
             [
                 ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#20365F")),
                 ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-                ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-                ("FONTSIZE", (0, 0), (-1, -1), 8.8),
-                ("LEADING", (0, 0), (-1, -1), 11),
                 ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.HexColor("#FBF7F0"), colors.HexColor("#F2ECDF")]),
                 ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#D8CEBF")),
                 ("VALIGN", (0, 0), (-1, -1), "TOP"),
@@ -309,7 +351,7 @@ def products_table():
     return table
 
 
-def role_table():
+def role_table(styles):
     rows = [
         ["Agent / Component", "Responsibility"],
         ["Scout", "Collects the market universe and surfaces candidate events for deeper review."],
@@ -320,15 +362,12 @@ def role_table():
         ["Referee", "Weights both sides and publishes the final investor-facing verdict."],
         ["Retriever + Answerer", "Powers Market ChatGPT with grounded, run-aware responses."],
     ]
-    table = Table(rows, colWidths=[130, 350])
+    table = Table(wrap_table_rows(rows, styles), colWidths=[122, 343], repeatRows=1, hAlign="LEFT")
     table.setStyle(
         TableStyle(
             [
                 ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#20365F")),
                 ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-                ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-                ("FONTSIZE", (0, 0), (-1, -1), 9.2),
-                ("LEADING", (0, 0), (-1, -1), 12),
                 ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.HexColor("#FBF7F0"), colors.HexColor("#F4EEE2")]),
                 ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#D8CEBF")),
                 ("VALIGN", (0, 0), (-1, -1), "TOP"),
@@ -408,25 +447,28 @@ def story():
         [
             Spacer(1, 16),
             Table(
-                [
+                wrap_table_rows(
+                    [
                     ["Repository", REPO_URL],
                     ["Pitch video", VIDEO_PATH],
                     ["Core products", "Opportunity Radar | Chart Pattern Intelligence | Market ChatGPT | AI Market Video Engine"],
                     ["Verification", "Automated test suite passing: 30 tests"],
-                ],
-                colWidths=[95, 410],
+                    ],
+                    styles,
+                    body_style="TableCell",
+                    header_style="TableCell",
+                ),
+                colWidths=[90, 375],
+                hAlign="LEFT",
                 style=TableStyle(
                     [
                         ("BACKGROUND", (0, 0), (-1, -1), colors.HexColor("#F4EEE2")),
                         ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#D8CEBF")),
-                        ("FONTNAME", (0, 0), (0, -1), "Helvetica-Bold"),
-                        ("FONTNAME", (1, 0), (1, -1), "Helvetica"),
-                        ("FONTSIZE", (0, 0), (-1, -1), 9.4),
-                        ("LEADING", (0, 0), (-1, -1), 12),
                         ("LEFTPADDING", (0, 0), (-1, -1), 8),
                         ("RIGHTPADDING", (0, 0), (-1, -1), 8),
                         ("TOPPADDING", (0, 0), (-1, -1), 7),
                         ("BOTTOMPADDING", (0, 0), (-1, -1), 7),
+                        ("VALIGN", (0, 0), (-1, -1), "TOP"),
                     ]
                 ),
             ),
@@ -445,7 +487,7 @@ def story():
                 "The system is deliberately productized into four surfaces rather than one generic dashboard. Each surface solves a distinct investor problem, but all four share the same underlying market context so the user can move from discovery to validation to explanation without losing continuity.",
                 styles["BodyCopy"],
             ),
-            products_table(),
+            products_table(styles),
         ]
     )
 
@@ -457,7 +499,7 @@ def story():
                 styles["BodyCopy"],
             ),
             Spacer(1, 8),
-            ArchitectureDiagram(width=540, height=250),
+            ArchitectureDiagram(width=465, height=240),
             Spacer(1, 10),
             bullet("Disclosure data and chart data remain parallel pipelines until they are intentionally merged for chat and video.", styles),
             bullet("Opportunity Radar uses the deepest agentic workflow because filing interpretation benefits most from multi-role reasoning.", styles),
@@ -473,7 +515,7 @@ def story():
                 "The agentic core sits inside the disclosure-analysis lane. Instead of sending a filing through one large prompt, the system routes shortlisted signals through specialized roles that each contribute a different perspective before a final publishable verdict is produced.",
                 styles["BodyCopy"],
             ),
-            role_table(),
+            role_table(styles),
             Spacer(1, 10),
             Paragraph("Why this is genuinely agentic and not just prompt chaining:", styles["SubSectionTitle"]),
             bullet("The workflow is role-based, stateful, and explicit inside LangGraph.", styles),
@@ -548,14 +590,12 @@ def story():
         ["Impact model", "Complete", "submission/impact_model.md"],
         ["Detailed PDF", "Complete", "submission/Investor_ai_Detailed_Submission.pdf"],
     ]
-    checklist = Table(checklist_rows, colWidths=[150, 70, 285])
+    checklist = Table(wrap_table_rows(checklist_rows, styles), colWidths=[122, 62, 281], repeatRows=1, hAlign="LEFT")
     checklist.setStyle(
         TableStyle(
             [
                 ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#20365F")),
                 ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-                ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-                ("FONTSIZE", (0, 0), (-1, -1), 9.2),
                 ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.HexColor("#FBF7F0"), colors.HexColor("#F4EEE2")]),
                 ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#D8CEBF")),
                 ("LEFTPADDING", (0, 0), (-1, -1), 8),
