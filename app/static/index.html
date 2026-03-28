@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Opportunity Radar | AI Market Video Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body data-page="home">
+    <div class="page-noise"></div>
+    <header class="site-header">
+      <div class="header-shell">
+        <a href="/" class="brand-lockup">
+          <span class="brand-mark">OR</span>
+          <span>
+            <span class="eyebrow">AI for the Indian Investor</span>
+            <strong>Opportunity Radar</strong>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/" class="active">Video Engine</a>
+          <a href="/radar">Opportunity Radar</a>
+          <a href="/chart-radar">Chart Intelligence</a>
+          <a href="/chat">Market ChatGPT</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-frame page-home page-home-pro">
+      <section class="panel home-command-panel">
+        <div class="home-command-copy">
+          <p class="eyebrow">AI Market Video Engine</p>
+          <h1>Auto-generate a market wrap from live signal-finder data.</h1>
+          <p class="lead-copy">
+            The app is now focused on four product surfaces only: Opportunity Radar, Chart Pattern Intelligence, Market ChatGPT, and the AI Market Video Engine. This page is the video engine control room.
+          </p>
+        </div>
+        <div class="home-command-meta">
+          <div id="homeRunBadge" class="run-badge">Loading latest runs...</div>
+          <div class="button-row hero-actions">
+            <a class="btn primary" href="/radar">Open Opportunity Radar</a>
+            <a class="btn secondary" href="/chart-radar">Open Chart Intelligence</a>
+            <a class="btn ghost" href="/chat">Open Market ChatGPT</a>
+          </div>
+        </div>
+        <div id="homeStats" class="usecase-grid"></div>
+      </section>
+
+      <section class="home-media-layout">
+        <article class="panel film-home-panel home-video-panel">
+          <div class="section-head film-home-head">
+            <div>
+              <p class="eyebrow">Daily Market Wrap</p>
+              <h2>Latest auto-generated market film</h2>
+              <p class="support-copy">
+                The player stays wide and readable, while the right rail keeps the live run metadata and generation logic close by.
+              </p>
+            </div>
+            <div id="homeVideoSyncBadge" class="run-badge">Checking wrap sync...</div>
+          </div>
+          <div class="film-player-shell">
+            <div id="homeVideoPlayer"></div>
+          </div>
+        </article>
+
+        <aside class="home-sidebar">
+          <section class="panel home-sidebar-panel">
+            <div class="section-head compact film-matrix-head">
+              <div>
+                <p class="eyebrow">Film Metadata</p>
+                <h3>Live render state</h3>
+              </div>
+            </div>
+            <div id="homeVideoMeta" class="film-meta-grid film-meta-grid-rail"></div>
+          </section>
+
+          <section class="panel home-sidebar-panel">
+            <div class="section-head compact film-matrix-head">
+              <div>
+                <p class="eyebrow">Generation Matrix</p>
+                <h3>What drives the film</h3>
+              </div>
+            </div>
+            <p class="support-copy film-matrix-copy">
+              The wrap is assembled from disclosure breadth, chart setup intensity, directional balance, and the merged research queue.
+            </p>
+            <div id="homeVideoMatrix" class="film-matrix-grid film-matrix-grid-rail"></div>
+          </section>
+        </aside>
+      </section>
+
+      <section class="home-board-grid">
+        <article class="panel">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Opportunity Radar</p>
+              <h2>Missed opportunities surfaced as signals</h2>
+              <p class="support-copy">Corporate filings, quarterly results, insider activity, deals, commentary shifts, and regulation changes are ranked here.</p>
+            </div>
+            <a class="btn secondary small" href="/radar">Open radar</a>
+          </div>
+          <div id="homeTopSignals" class="signal-grid"></div>
+        </article>
+
+        <article class="panel chart-home-panel">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Chart Pattern Intelligence</p>
+              <h2>Technical structure across the NSE universe</h2>
+              <p class="support-copy">Breakouts, reversals, support and resistance reactions, and divergences stay in a separate lane with backtest context.</p>
+            </div>
+            <a class="btn secondary small" href="/chart-radar">Open charts</a>
+          </div>
+          <div id="homeChartSignals" class="signal-grid"></div>
+        </article>
+      </section>
+    </main>
+
+    <script type="module" src="/static/home.js"></script>
+  </body>
+</html>

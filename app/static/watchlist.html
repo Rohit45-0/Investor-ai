@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Opportunity Radar | Watchlist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body data-page="watchlist">
+    <div class="page-noise"></div>
+    <header class="site-header">
+      <div class="header-shell">
+        <a href="/" class="brand-lockup">
+          <span class="brand-mark">OR</span>
+          <span>
+            <span class="eyebrow">AI for the Indian Investor</span>
+            <strong>Opportunity Radar</strong>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="/radar">Daily Radar</a>
+          <a href="/chart-radar">Chart Radar</a>
+          <a href="/watchlist" class="active">Watchlist</a>
+          <a href="/chat">Chat</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-frame page-watchlist">
+      <section class="panel watchlist-hero">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">My Watchlist</p>
+            <h1>Keep your own names in focus.</h1>
+            <p class="lead-copy">Save the stocks you care about and turn the radar into a personal investor feed.</p>
+          </div>
+          <div id="watchlistSummaryBadge" class="run-badge">0 saved</div>
+        </div>
+
+        <form id="watchlistPageForm" class="watchlist-form wide-form">
+          <input id="watchlistPageInput" list="watchlistSuggestions" type="text" placeholder="Add a symbol like MRPL or RELIANCE" autocomplete="off" />
+          <button class="btn primary" type="submit">Add Stock</button>
+        </form>
+        <datalist id="watchlistSuggestions"></datalist>
+
+        <div class="subsection-head">
+          <span class="eyebrow">Quick Add</span>
+          <span class="support-copy">Start from today&apos;s strongest signals</span>
+        </div>
+        <div id="watchlistQuickAdd" class="quick-add-grid"></div>
+      </section>
+
+      <section class="panel">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Saved Stocks</p>
+            <h2>Your personal radar</h2>
+            <p class="support-copy">Open any stock to see the full brief, even if it is quiet today.</p>
+          </div>
+        </div>
+        <div id="watchlistFeed" class="signal-grid signal-grid-wide"></div>
+      </section>
+    </main>
+
+    <script type="module" src="/static/watchlist.js"></script>
+  </body>
+</html>

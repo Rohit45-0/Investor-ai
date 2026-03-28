@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Opportunity Radar | Signal Finder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body data-page="radar">
+    <div class="page-noise"></div>
+    <header class="site-header">
+      <div class="header-shell">
+        <a href="/" class="brand-lockup">
+          <span class="brand-mark">OR</span>
+          <span>
+            <span class="eyebrow">AI for the Indian Investor</span>
+            <strong>Opportunity Radar</strong>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/">Video Engine</a>
+          <a href="/radar" class="active">Opportunity Radar</a>
+          <a href="/chart-radar">Chart Intelligence</a>
+          <a href="/chat">Market ChatGPT</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-frame page-radar">
+      <section class="panel radar-hero">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Opportunity Radar</p>
+            <h1>Continuously monitor filings and surface missed opportunities as daily alerts.</h1>
+            <p class="lead-copy">This lane is the signal-finder, not a summarizer. It tracks corporate filings, quarterly results, bulk and block deals, insider trades, management commentary shifts, and regulatory changes.</p>
+          </div>
+        </div>
+
+        <div class="control-bar">
+          <label class="control-block" for="radarRunSelect">
+            <span class="eyebrow">Run</span>
+            <select id="radarRunSelect" class="field-select"></select>
+          </label>
+
+          <div class="filter-group" id="radarFilterGroup">
+            <button class="filter-chip active" data-filter="all" type="button">All</button>
+            <button class="filter-chip" data-filter="watchlist" type="button">Watchlist</button>
+            <button class="filter-chip" data-filter="bullish" type="button">Bullish</button>
+            <button class="filter-chip" data-filter="bearish" type="button">Bearish</button>
+          </div>
+
+          <button id="radarRefreshButton" class="btn primary" type="button">Refresh Opportunity Radar</button>
+        </div>
+
+        <div id="radarSummary" class="stats-row"></div>
+        <div id="radarProcess" class="pipeline-inline"></div>
+      </section>
+
+      <section class="panel">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Alert Feed</p>
+            <h2 id="radarFeedTitle">Top daily alerts</h2>
+            <p class="support-copy">Each card explains what changed, why it matters, and which names deserve deeper follow-up.</p>
+          </div>
+          <div id="radarCount" class="run-badge">0 alerts</div>
+        </div>
+        <div id="radarFeed" class="signal-grid signal-grid-wide"></div>
+      </section>
+    </main>
+
+    <script type="module" src="/static/radar.js"></script>
+  </body>
+</html>

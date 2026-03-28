@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Opportunity Radar | Market ChatGPT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body data-page="chat">
+    <div class="page-noise"></div>
+    <header class="site-header">
+      <div class="header-shell">
+        <a href="/" class="brand-lockup">
+          <span class="brand-mark">OR</span>
+          <span>
+            <span class="eyebrow">AI for the Indian Investor</span>
+            <strong>Opportunity Radar</strong>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/">Video Engine</a>
+          <a href="/radar">Opportunity Radar</a>
+          <a href="/chart-radar">Chart Intelligence</a>
+          <a href="/chat" class="active">Market ChatGPT</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-frame page-chat">
+      <section class="panel">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Market ChatGPT - Next Gen</p>
+            <h1>Ask deeper, source-cited market questions on top of your indexed runs.</h1>
+            <p class="lead-copy">This lane is built to beat shallow market chat. It answers from indexed filings, evidence, and radar signals with multi-step, grounded reasoning instead of guesses.</p>
+          </div>
+          <div class="button-row">
+            <button id="chatIndexButton" class="btn secondary" type="button">Index Selected Run</button>
+          </div>
+        </div>
+        <div id="chatStatusCards" class="stats-row"></div>
+      </section>
+
+      <section class="chat-layout">
+        <aside class="panel chat-side">
+          <div class="section-head compact">
+            <div>
+              <p class="eyebrow">Prompt Starters</p>
+              <h2>Quick ways in</h2>
+            </div>
+          </div>
+          <div id="chatSuggestions" class="chat-suggestions"></div>
+
+          <div class="section-head compact">
+            <div>
+              <p class="eyebrow">Latest Sources</p>
+              <h2>What the answer used</h2>
+            </div>
+          </div>
+          <div id="chatSources" class="chat-sources"></div>
+        </aside>
+
+        <section class="panel chat-main">
+          <div class="chat-toolbar">
+            <label class="control-block" for="chatRunSelect">
+              <span class="eyebrow">Run</span>
+              <select id="chatRunSelect" class="field-select"></select>
+            </label>
+            <label class="control-block" for="chatSymbolInput">
+              <span class="eyebrow">Focus Symbol</span>
+              <input id="chatSymbolInput" class="field-select" type="text" placeholder="Optional, like CELEBRITY" />
+            </label>
+          </div>
+
+          <div id="chatTranscript" class="chat-transcript"></div>
+
+          <form id="chatForm" class="chat-form">
+            <textarea id="chatInput" placeholder="Ask something like: Why is CELEBRITY bullish today?" rows="4"></textarea>
+            <div class="button-row">
+              <button class="btn primary" type="submit">Ask Radar</button>
+            </div>
+          </form>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="/static/chat.js"></script>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Opportunity Radar | Stock Brief</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body data-page="brief">
+    <div class="page-noise"></div>
+    <header class="site-header">
+      <div class="header-shell">
+        <a href="/" class="brand-lockup">
+          <span class="brand-mark">OR</span>
+          <span>
+            <span class="eyebrow">AI for the Indian Investor</span>
+            <strong>Opportunity Radar</strong>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="/radar">Daily Radar</a>
+          <a href="/chart-radar">Chart Radar</a>
+          <a href="/watchlist">Watchlist</a>
+          <a href="/chat">Chat</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-frame page-brief">
+      <section class="panel brief-hero" id="briefHero"></section>
+
+      <section class="panel brief-chart-panel">
+        <div class="section-head compact">
+          <div>
+            <p class="eyebrow">Chart Intelligence</p>
+            <h2>Price structure and pattern context</h2>
+          </div>
+        </div>
+        <div id="briefChart"></div>
+      </section>
+
+      <section class="brief-layout">
+        <article class="panel brief-main">
+          <div class="section-head compact">
+            <div>
+              <p class="eyebrow">What Changed</p>
+              <h2>Plain-English brief</h2>
+            </div>
+          </div>
+          <div id="briefSummary"></div>
+        </article>
+
+        <aside class="brief-side">
+          <section class="panel detail-card">
+            <div class="section-head compact">
+              <div>
+                <p class="eyebrow">Highlights</p>
+                <h2>Filing clues</h2>
+              </div>
+            </div>
+            <div id="briefHighlights"></div>
+          </section>
+
+          <section class="panel detail-card">
+            <div class="section-head compact">
+              <div>
+                <p class="eyebrow">Facts</p>
+                <h2>Structured data</h2>
+              </div>
+            </div>
+            <div id="briefFacts" class="fact-grid"></div>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <script type="module" src="/static/brief.js"></script>
+  </body>
+</html>
